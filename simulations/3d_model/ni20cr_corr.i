@@ -329,7 +329,7 @@
   [switch_melt]
     type = DerivativeParsedMaterial
     f_name = 'h_melt'
-    args = 'eta1 ${GlobalParams/poly_grains}'
+    coupled_variables = 'eta1 ${GlobalParams/poly_grains}'
     material_property_names = 'pi del_int'
     function = '0.5*(1 + tanh( 2*pi*(eta1-0.5)/del_int ) )'
     output_properties = 'h_melt'
@@ -337,14 +337,14 @@
   [switch_metal]
     type = DerivativeParsedMaterial
     f_name = 'h_metal'
-    args = 'eta1 ${GlobalParams/poly_grains}'
+    coupled_variables = 'eta1 ${GlobalParams/poly_grains}'
     material_property_names = 'pi del_int'
     function = '0.5*(1 - tanh( 2*pi*(eta1 -0.5)/del_int ) )'
     output_properties = 'h_metal'
   []
   [h_gb]
     type = ParsedMaterial
-    args = '${GlobalParams/poly_grains} bnds'
+    coupled_variables = '${GlobalParams/poly_grains} bnds'
     f_name = 'h_gb'
     material_property_names = 'pi del_int b l'
     function = '0.5-0.5*tanh(pi*(bnds-b)/l)'
@@ -354,7 +354,7 @@
   [c_Ni_metal]
     type = DerivativeParsedMaterial
     f_name = "c_Ni_metal"
-    args = 'w_Ni w_Cr'
+    coupled_variables = 'w_Ni w_Cr'
     material_property_names = 'kB T k_metal E0_Ni_metal E0_Va_metal  E0_Cr_metal'
     function = 'exp( (w_Ni - (E0_Ni_metal - E0_Va_metal))/kB/T/k_metal )/( 1 + exp( (w_Ni - '
                '(E0_Ni_metal - E0_Va_metal))/kB/T/k_metal ) + exp( (w_Cr - (E0_Cr_metal - '
@@ -364,7 +364,7 @@
   [c_Ni_melt]
     type = DerivativeParsedMaterial
     f_name = "c_Ni_melt"
-    args = 'w_Ni w_Cr'
+    coupled_variables = 'w_Ni w_Cr'
     material_property_names = 'kB T k_melt E0_Ni_melt E0_Va_melt E0_Cr_melt'
     function = 'exp( (w_Ni - (E0_Ni_melt) - k_melt*kB*T)/kB/T/k_melt )'
     output_properties = 'c_Ni_melt'
@@ -372,7 +372,7 @@
   [c_Cr_metal]
     type = DerivativeParsedMaterial
     f_name = "c_Cr_metal"
-    args = 'w_Ni w_Cr'
+    coupled_variables = 'w_Ni w_Cr'
     material_property_names = 'kB T k_metal E0_Ni_metal E0_Cr_metal E0_Va_metal'
     function = 'exp( (w_Cr - (E0_Cr_metal - E0_Va_metal))/kB/T/k_metal )/( 1 + exp( (w_Ni - '
                '(E0_Ni_metal - E0_Va_metal))/kB/T/k_metal ) + exp( (w_Cr - (E0_Cr_metal - '
@@ -383,7 +383,7 @@
   [c_Cr_melt]
     type = DerivativeParsedMaterial
     f_name = "c_Cr_melt"
-    args = 'w_Ni w_Cr'
+    coupled_variables = 'w_Ni w_Cr'
     material_property_names = 'kB T k_melt E0_Ni_melt E0_Va_melt E0_Cr_melt'
     function = 'exp( (w_Cr - (E0_Cr_melt - E0_Va_melt) - k_melt*kB*T)/kB/T/k_melt )'
     #outputs = exodus
@@ -418,7 +418,7 @@
   [del_c_Ni]
     type = DerivativeParsedMaterial
     f_name = 'del_c_Ni'
-    args = 'w_Ni w_Cr ${GlobalParams/poly_grains} eta1 '
+    coupled_variables = 'w_Ni w_Cr ${GlobalParams/poly_grains} eta1 '
     material_property_names = 'kB T k_metal E0_Ni_metal E0_Va_metal  E0_Cr_metal k_melt E0_Ni_melt '
                               'E0_Va_melt E0_Cr_melt'
     function = 'exp( (w_Ni - (E0_Ni_metal - E0_Va_metal))/kB/T/k_metal )/( 1 + exp( (w_Ni - '
@@ -430,7 +430,7 @@
   [del_c_Cr]
     type = DerivativeParsedMaterial
     f_name = 'del_c_Cr'
-    args = 'w_Ni w_Cr ${GlobalParams/poly_grains} eta1 '
+    coupled_variables = 'w_Ni w_Cr ${GlobalParams/poly_grains} eta1 '
     material_property_names = 'kB T k_metal E0_Ni_metal E0_Cr_metal E0_Va_metal k_melt E0_Ni_melt '
                               'E0_Va_melt E0_Cr_melt'
     function = 'exp( (w_Cr - (E0_Cr_metal - E0_Va_metal))/kB/T/k_metal )/( 1 + exp( (w_Ni - '
@@ -443,7 +443,7 @@
   [omega_metal]
     type = DerivativeParsedMaterial
     f_name = 'omega_metal'
-    args = '${GlobalParams/poly_grains} eta1 w_Ni w_Cr'
+    coupled_variables = '${GlobalParams/poly_grains} eta1 w_Ni w_Cr'
     material_property_names = 'kB T k_metal E0_Ni_metal E0_Va_metal  E0_Cr_metal Va'
     function = '(E0_Va_metal - kB*T*k_metal*log( 1 + exp( (w_Ni - (E0_Ni_metal - '
                'E0_Va_metal))/kB/T/k_metal ) + exp( (w_Cr - (E0_Cr_metal - '
@@ -455,7 +455,7 @@
   [omega_melt]
     type = DerivativeParsedMaterial
     f_name = 'omega_melt'
-    args = '${GlobalParams/poly_grains}  eta1 w_Ni w_Cr'
+    coupled_variables = '${GlobalParams/poly_grains}  eta1 w_Ni w_Cr'
     material_property_names = 'kB T k_melt E0_Ni_melt E0_Va_melt E0_Cr_melt Va'
     function = '(E0_Va_melt - kB*T*k_melt*(exp( (w_Ni - (E0_Ni_melt - E0_Va_melt) - '
                'k_melt*kB*T)/kB/T/k_melt ) + exp( (w_Cr - (E0_Cr_melt - E0_Va_melt) - '
@@ -467,7 +467,7 @@
   [omega_chem]
     type = DerivativeParsedMaterial
     f_name = omega_chem
-    args = '${GlobalParams/poly_grains} eta1 w_Ni w_Cr'
+    coupled_variables = '${GlobalParams/poly_grains} eta1 w_Ni w_Cr'
     material_property_names = 'h_metal omega_metal omega_melt Va'
     function = '(omega_metal-omega_melt)*Va'
     outputs = nemesis
@@ -476,7 +476,7 @@
   [susceptibility_Ni]
     type = DerivativeParsedMaterial
     f_name = 'chi_Ni'
-    args = '${GlobalParams/poly_grains} eta1  w_Ni w_Cr'
+    coupled_variables = '${GlobalParams/poly_grains} eta1  w_Ni w_Cr'
     material_property_names = 'c_Ni_metal(w_Ni,w_Cr) c_Ni_melt(w_Ni,w_Cr) h_metal '
                               'chi_Ni_metal:=D[c_Ni_metal,w_Ni] chi_Ni_melt:=D[c_Ni_melt,w_Ni]'
     function = 'chi_Ni_metal*h_metal + chi_Ni_melt*(1-h_metal)'
@@ -514,7 +514,7 @@
   [mobility_Ni]
     type = DerivativeParsedMaterial
     f_name = M_Ni
-    args = '${GlobalParams/poly_grains} eta1 w_Ni w_Cr'
+    coupled_variables = '${GlobalParams/poly_grains} eta1 w_Ni w_Cr'
     material_property_names = 'chi_Ni h_metal h_melt h_gb D_Ni_V D_Ni_GB interface_thickness_l '
                               'GB_width'
     function = '((D_Ni_V +   1.0*(D_Ni_GB-D_Ni_V )*(GB_width/interface_thickness_l)*h_gb)*h_metal + '
@@ -527,7 +527,7 @@
   [susceptibility_Cr]
     type = DerivativeParsedMaterial
     f_name = 'chi_Cr'
-    args = '${GlobalParams/poly_grains} eta1 w_Ni w_Cr'
+    coupled_variables = '${GlobalParams/poly_grains} eta1 w_Ni w_Cr'
     material_property_names = 'c_Cr_metal(w_Ni,w_Cr) c_Cr_melt(w_Ni,w_Cr) h_metal '
                               'chi_Cr_metal:=D[c_Cr_metal,w_Cr] chi_Cr_melt:=D[c_Cr_melt,w_Cr]'
     function = 'chi_Cr_metal*h_metal + chi_Cr_melt*(1-h_metal)'
@@ -566,7 +566,7 @@
   [mobility_Cr]
     type = DerivativeParsedMaterial
     f_name = M_Cr
-    args = '${GlobalParams/poly_grains} eta1  w_Ni w_Cr'
+    coupled_variables = '${GlobalParams/poly_grains} eta1  w_Ni w_Cr'
     material_property_names = 'chi_Cr h_metal h_melt h_gb interface_thickness_l GB_width D_Cr_V '
                               'D_Cr_GB'
     function = '((D_Cr_V +   1.0*( D_Cr_GB - D_Cr_V )*(GB_width/interface_thickness_l)*h_gb)*h_metal '
@@ -577,7 +577,7 @@
   []
   [M_H]
     type = DerivativeParsedMaterial
-    args = '${GlobalParams/poly_grains} eta1  w_Ni w_Cr'
+    coupled_variables = '${GlobalParams/poly_grains} eta1  w_Ni w_Cr'
     f_name = 'M_H'
     material_property_names = 'h_metal h_melt kB T k_melt R E0_F E_F'
 
@@ -596,7 +596,7 @@
 
   [M_e]
     type = DerivativeParsedMaterial
-    args = 'w_Ni ${GlobalParams/poly_grains} eta1 '
+    coupled_variables = 'w_Ni ${GlobalParams/poly_grains} eta1 '
     f_name = 'M_e'
     material_property_names = 'h_metal h_melt kB T k_metal Va sigma_e e'
     function = '( (sigma_e*Va/2/e)*h_metal + 1e-12*h_melt )/kB/T/k_metal'
@@ -605,7 +605,7 @@
   #Computing phi
   [flux_Ni]
     type = DerivativeParsedMaterial
-    args = '${GlobalParams/poly_grains} eta1  w_Ni phi'
+    coupled_variables = '${GlobalParams/poly_grains} eta1  w_Ni phi'
     f_name = 'chem_flux_Ni'
     material_property_names = '   M_Ni M_H h_metal h_melt'
     function = 'h_melt*M_Ni*2'
@@ -613,7 +613,7 @@
   []
   [flux_Cr]
     type = DerivativeParsedMaterial
-    args = '${GlobalParams/poly_grains} eta1 w_Cr phi'
+    coupled_variables = '${GlobalParams/poly_grains} eta1 w_Cr phi'
     f_name = 'chem_flux_Cr'
     material_property_names = '   M_Cr M_H h_metal h_melt'
     function = 'h_melt*M_Cr*2'
@@ -623,7 +623,7 @@
   [grad_phi_coeff]
     type = DerivativeParsedMaterial
     f_name = 'elec_flux'
-    args = '${GlobalParams/poly_grains} eta1  w_Ni phi'
+    coupled_variables = '${GlobalParams/poly_grains} eta1  w_Ni phi'
     material_property_names = '   M_Ni M_Cr M_H M_e h_metal h_melt'
     function = 'h_melt*(4*M_Ni + 4*M_Cr + M_H) + (h_metal)*M_e'
     output_properties = 'elec_flux'
@@ -634,7 +634,7 @@
   [elec_M_Ni]
     type = DerivativeParsedMaterial
     f_name = 'elec_M_Ni'
-    args = 'w_Ni ${GlobalParams/poly_grains} eta1  phi'
+    coupled_variables = 'w_Ni ${GlobalParams/poly_grains} eta1  phi'
     material_property_names = 'h_metal h_melt M_Ni'
     function = 'h_melt*M_Ni*2'
     derivative_order = 2
@@ -642,7 +642,7 @@
   [elec_M_Cr]
     type = DerivativeParsedMaterial
     f_name = 'elec_M_Cr'
-    args = 'w_Cr ${GlobalParams/poly_grains} eta1  phi'
+    coupled_variables = 'w_Cr ${GlobalParams/poly_grains} eta1  phi'
     material_property_names = 'h_metal h_melt M_Cr'
     function = 'h_melt*M_Cr*2'
     derivative_order = 2
@@ -759,7 +759,7 @@
   [nemesis]
     type = Nemesis
     execute_on = 'initial timestep_end final'
-    interval = 10
+    time_step_interval = 10
   []
   csv = true
   perf_graph = true

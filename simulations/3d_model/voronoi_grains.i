@@ -6,7 +6,7 @@
 [Mesh]
   [gen]
     type = DistributedRectilinearMeshGenerator
-    dim = 3
+    dim = 2
     xmin = 0
     xmax = 50
     nx = 50
@@ -14,12 +14,6 @@
     ymin = 0
     ymax = 15
     ny = 15
-
-    zmin = 0
-    zmax = 15
-    zy = 15
-
-    elem_type = QUAD4
   []
 
   parallel_type = DISTRIBUTED

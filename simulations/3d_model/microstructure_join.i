@@ -235,49 +235,49 @@
   [c_Ni_metal]
     type = DerivativeParsedMaterial
     f_name = 'c_Ni_metal'
-    args = 'w_Ni'
+    coupled_variables = 'w_Ni'
     material_property_names = 'kB T k_metal E0_Ni_metal c0_Ni_metal'
     function = 'w_Ni/E0_Ni_metal + c0_Ni_metal'
   []
   [c_Ni_melt]
     type = DerivativeParsedMaterial
     f_name = 'c_Ni_melt'
-    args = 'w_Ni'
+    coupled_variables = 'w_Ni'
     material_property_names = 'kB T k_melt E0_Ni_melt c0_Ni_melt'
     function = 'w_Ni/E0_Ni_melt + c0_Ni_melt'
   []
   [chi_Ni]
     type = DerivativeParsedMaterial
     f_name = 'chi_Ni'
-    args = 'w_Ni eta1  ${GlobalParams/poly_grains}'# gr8 gr9 gr10 gr11' # gr8 gr9'# gr10 gr11 gr12 gr13 gr14'
+    coupled_variables = 'w_Ni eta1  ${GlobalParams/poly_grains}'# gr8 gr9 gr10 gr11' # gr8 gr9'# gr10 gr11 gr12 gr13 gr14'
     material_property_names = 'E0_Ni_metal E0_Ni_melt h_metal'
     function = 'h_metal/E0_Ni_metal + (1-h_metal)/E0_Ni_melt'
   []
   [M_Ni]
     type = DerivativeParsedMaterial
     f_name = 'M_Ni'
-    args = 'w_Ni eta1  ${GlobalParams/poly_grains}'# gr8 gr9 gr10 gr11' # gr8 gr9'# gr10 gr11 gr12 gr13 gr14'
+    coupled_variables = 'w_Ni eta1  ${GlobalParams/poly_grains}'# gr8 gr9 gr10 gr11' # gr8 gr9'# gr10 gr11 gr12 gr13 gr14'
     material_property_names = 'chi_Ni'
     function = '1e-4*chi_Ni'
   []
   [omega_metal]
     type = DerivativeParsedMaterial
     f_name = 'omega_metal'
-    args = 'w_Ni eta1  ${GlobalParams/poly_grains}'# gr8 gr9 gr10 gr11' # gr8 gr9'# gr10 gr11 gr12 gr13 gr14'
+    coupled_variables = 'w_Ni eta1  ${GlobalParams/poly_grains}'# gr8 gr9 gr10 gr11' # gr8 gr9'# gr10 gr11 gr12 gr13 gr14'
     material_property_names = 'E0_Ni_metal c0_Ni_metal'
     function = '-0.5*w_Ni*(w_Ni/E0_Ni_metal + c0_Ni_metal)'
   []
   [omega_melt]
     type = DerivativeParsedMaterial
     f_name = 'omega_melt'
-    args = 'w_Ni eta1  ${GlobalParams/poly_grains}'# gr8 gr9 gr10 gr11'
+    coupled_variables = 'w_Ni eta1  ${GlobalParams/poly_grains}'# gr8 gr9 gr10 gr11'
         material_property_names = 'E0_Ni_melt c0_Ni_melt'
     function = '-0.5*w_Ni*(w_Ni/E0_Ni_melt + c0_Ni_melt)'
   []
   [gb_perimeter]
     type = ParsedMaterial
     f_name ='gb_perimeter'
-    args = 'bnds'
+    coupled_variables = 'bnds'
     material_property_names = 'interface_thickness_l'
     function = '(bnds>=0.08 & bnds<=0.5)/interface_thickness_l'
   []

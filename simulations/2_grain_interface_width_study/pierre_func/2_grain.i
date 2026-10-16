@@ -88,7 +88,7 @@
   [D_Cr_V]
     type = DerivativeParsedMaterial
     f_name = 'D_Cr_V'
-    args = 'grain1 c'
+    coupled_variables = 'grain1 c'
     material_property_names = 'T R xc'
     function = '2.072e-7'
     outputs = exodus
@@ -96,14 +96,14 @@
   [D_Cr_GB]
     type = DerivativeParsedMaterial
     f_name = 'D_Cr_GB'
-    args = 'grain1 c'
+    coupled_variables = 'grain1 c'
     material_property_names = 'T R xc interface_thickness_l GB_width'
     function = '(7.26e-4)'
     outputs = exodus
   []
   [diffusivity]
     type = DerivativeParsedMaterial
-    args = 'grain1 c'
+    coupled_variables = 'grain1 c'
     material_property_names = 'h_melt h_gb D_Cr_V D_Cr_GB GB_width interface_thickness_l'
     function = '(1-h_melt)*(D_Cr_V + h_gb*(  D_Cr_GB/GB_width - '
                'D_Cr_V)*(GB_width/interface_thickness_l) )'
@@ -112,7 +112,7 @@
   []
   [h_melt]
     type = DerivativeParsedMaterial
-    args = 'grain1 grain2'
+    coupled_variables = 'grain1 grain2'
     f_name = h_melt
     material_property_names = 'pi del_int'
     function = 'eta1:=1-grain1-grain2;0.5*(1+tanh(2*pi*(eta1-0.5)/del_int ))'
@@ -120,7 +120,7 @@
   []
   [h_gb]
     type = DerivativeParsedMaterial
-    args = 'grain1 grain2'
+    coupled_variables = 'grain1 grain2'
     f_name = h_gb
     material_property_names = 'b l pi'
     function = 'bnds:=grain1^2+grain2^2;0.5-0.5*tanh(pi*(bnds-b)/l )'
